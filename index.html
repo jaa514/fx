@@ -1,1116 +1,639 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jasur Square Root Calculator</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      /* ──────────────────── VARIABLES & THEME ──────────────────── */
-      :root {
-        --bg-primary: #0a0e14;
-        --bg-card: #111827;
-        --bg-input: #0c1420;
-        --border: #1e3050;
-        --text-primary: #c8d8e8;
-        --text-sec: #5a7a9a;
-        --text-dim: #2e4a6a;
-        --green: #00d17a;
-        --green-bg: rgba(0, 209, 122, 0.07);
-        --green-border: rgba(0, 209, 122, 0.28);
-        --red: #ff4757;
-        --red-bg: rgba(255, 71, 87, 0.07);
-        --red-border: rgba(255, 71, 87, 0.28);
-        --gold: #f0a500;
-        --th: #1a6fc4;
-        --th-bg: rgba(26, 111, 196, 0.07);
-        --th-border: rgba(26, 111, 196, 0.25);
-        --th-glow: rgba(26, 111, 196, 0.18);
-        --th-grad1: #0e2a50;
-      }
-      body.sell {
-        --th: #ff4757;
-        --th-bg: rgba(255, 71, 87, 0.07);
-        --th-border: rgba(255, 71, 87, 0.25);
-        --th-glow: rgba(255, 71, 87, 0.18);
-        --th-grad1: #3a0a10;
-      }
-      body.buy {
-        --th: #00d17a;
-        --th-bg: rgba(0, 209, 122, 0.07);
-        --th-border: rgba(0, 209, 122, 0.25);
-        --th-glow: rgba(0, 209, 122, 0.18);
-        --th-grad1: #002e1a;
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jasur Root Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════ CSS VARIABLES ═══════════════════════ */
+:root {
+  --bg:        #080c12;
+  --bg-card:   #0e1620;
+  --bg-input:  #0a1018;
+  --border:    #1a2d48;
+  --text:      #c0d4e8;
+  --text-sec:  #4a6a8a;
+  --text-dim:  #243550;
+  --gold:      #e8a000;
 
-      /* ──────────────────── BASE ──────────────────── */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "Rajdhani", sans-serif;
-        background: var(--bg-primary);
-        color: var(--text-primary);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 20px 16px;
-        transition: background-image 0.5s;
-      }
-      body {
-        background-image:
-          radial-gradient(
-            ellipse 60% 40% at 20% 0%,
-            rgba(26, 111, 196, 0.08) 0%,
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 60% 40% at 80% 100%,
-            rgba(26, 111, 196, 0.05) 0%,
-            transparent 70%
-          ),
-          repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 39px,
-            rgba(30, 48, 80, 0.12) 39px,
-            rgba(30, 48, 80, 0.12) 40px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 39px,
-            rgba(30, 48, 80, 0.12) 39px,
-            rgba(30, 48, 80, 0.12) 40px
-          );
-      }
-      body.sell {
-        background-image:
-          radial-gradient(
-            ellipse 60% 40% at 20% 0%,
-            rgba(255, 71, 87, 0.09) 0%,
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 60% 40% at 80% 100%,
-            rgba(200, 30, 40, 0.06) 0%,
-            transparent 70%
-          ),
-          repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 39px,
-            rgba(30, 48, 80, 0.12) 39px,
-            rgba(30, 48, 80, 0.12) 40px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 39px,
-            rgba(30, 48, 80, 0.12) 39px,
-            rgba(30, 48, 80, 0.12) 40px
-          );
-      }
-      body.buy {
-        background-image:
-          radial-gradient(
-            ellipse 60% 40% at 20% 0%,
-            rgba(0, 209, 122, 0.08) 0%,
-            transparent 70%
-          ),
-          radial-gradient(
-            ellipse 60% 40% at 80% 100%,
-            rgba(0, 160, 90, 0.05) 0%,
-            transparent 70%
-          ),
-          repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 39px,
-            rgba(30, 48, 80, 0.12) 39px,
-            rgba(30, 48, 80, 0.12) 40px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 39px,
-            rgba(30, 48, 80, 0.12) 39px,
-            rgba(30, 48, 80, 0.12) 40px
-          );
-      }
+  /* active theme — overridden per mode */
+  --ac:        #1a6fc4;
+  --ac-bg:     rgba(26,111,196,.08);
+  --ac-border: rgba(26,111,196,.3);
+  --ac-glow:   rgba(26,111,196,.22);
+  --ac-dark:   #0c2040;
 
-      .container {
-        width: 100%;
-        max-width: 490px;
-      }
+  --green:     #00cc76;
+  --red:       #ff3f50;
+}
 
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(18px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes slideUp {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes blink {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.35;
-        }
-      }
-      @keyframes scanline {
-        0% {
-          top: -10%;
-        }
-        100% {
-          top: 110%;
-        }
-      }
+/* ── MODE THEMES ── */
+body.sell {
+  --ac: #ff3f50; --ac-bg: rgba(255,63,80,.08);
+  --ac-border: rgba(255,63,80,.32); --ac-glow: rgba(255,63,80,.22);
+  --ac-dark: #2e0810;
+}
+body.buy {
+  --ac: #00cc76; --ac-bg: rgba(0,204,118,.08);
+  --ac-border: rgba(0,204,118,.3); --ac-glow: rgba(0,204,118,.2);
+  --ac-dark: #00200e;
+}
 
-      /* ──────────────────── HEADER ──────────────────── */
-      .header {
-        text-align: center;
-        margin-bottom: 22px;
-        animation: fadeUp 0.6s ease;
-      }
-      .header-badge {
-        display: inline-block;
-        font-family: "Share Tech Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: var(--th);
-        background: var(--th-bg);
-        border: 1px solid var(--th-border);
-        padding: 4px 14px;
-        margin-bottom: 12px;
-        transition:
-          color 0.4s,
-          background 0.4s,
-          border-color 0.4s;
-      }
-      .header h1 {
-        font-size: 28px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #ddeeff;
-      }
-      .header h1 span {
-        color: var(--gold);
-      }
-      .header-sub {
-        margin-top: 8px;
-        font-size: 12px;
-        color: var(--text-sec);
-        letter-spacing: 1.5px;
-        font-family: "Share Tech Mono", monospace;
-        transition: color 0.4s;
-      }
+/* ═══════════════════════ RESET & BASE ═══════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-      /* ──────────────────── STRATEGY TOGGLE ──────────────────── */
-      .strategy-section {
-        margin-bottom: 20px;
-        animation: fadeUp 0.6s 0.1s both;
-      }
-      .s-label {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--text-dim);
-        text-align: center;
-        display: block;
-        margin-bottom: 10px;
-      }
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px 16px;
+  transition: background-image .6s;
+}
 
-      .toggle-row {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        background: var(--bg-input);
-        border: 1px solid var(--border);
-        padding: 4px;
-        gap: 3px;
-      }
+/* Dynamic BG glow per mode */
+body {
+  background-image:
+    radial-gradient(ellipse 55% 35% at 15% 5%,  rgba(26,111,196,.07) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 30% at 85% 95%, rgba(26,111,196,.05) 0%, transparent 65%),
+    repeating-linear-gradient(0deg,   transparent, transparent 39px, rgba(20,40,70,.14) 39px, rgba(20,40,70,.14) 40px),
+    repeating-linear-gradient(90deg,  transparent, transparent 39px, rgba(20,40,70,.14) 39px, rgba(20,40,70,.14) 40px);
+}
+body.sell { background-image:
+    radial-gradient(ellipse 55% 35% at 15% 5%,  rgba(255,63,80,.1)  0%, transparent 65%),
+    radial-gradient(ellipse 45% 30% at 85% 95%, rgba(200,20,35,.06) 0%, transparent 65%),
+    repeating-linear-gradient(0deg,   transparent, transparent 39px, rgba(20,40,70,.14) 39px, rgba(20,40,70,.14) 40px),
+    repeating-linear-gradient(90deg,  transparent, transparent 39px, rgba(20,40,70,.14) 39px, rgba(20,40,70,.14) 40px);
+}
+body.buy { background-image:
+    radial-gradient(ellipse 55% 35% at 15% 5%,  rgba(0,204,118,.09) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 30% at 85% 95%, rgba(0,160,80,.06)  0%, transparent 65%),
+    repeating-linear-gradient(0deg,   transparent, transparent 39px, rgba(20,40,70,.14) 39px, rgba(20,40,70,.14) 40px),
+    repeating-linear-gradient(90deg,  transparent, transparent 39px, rgba(20,40,70,.14) 39px, rgba(20,40,70,.14) 40px);
+}
 
-      .t-btn {
-        padding: 13px 6px;
-        border: 1px solid transparent;
-        background: transparent;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 3px;
-        font-family: "Rajdhani", sans-serif;
-      }
-      .t-btn .t-icon {
-        font-size: 22px;
-        line-height: 1;
-        transition: transform 0.3s;
-      }
-      .t-btn .t-main {
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--text-sec);
-        transition: color 0.3s;
-      }
-      .t-btn .t-sub {
-        font-size: 9px;
-        letter-spacing: 1px;
-        font-family: "Share Tech Mono", monospace;
-        color: var(--text-dim);
-        transition: color 0.3s;
-      }
-      .t-btn:hover .t-main {
-        color: var(--text-primary);
-      }
+.wrap { width: 100%; max-width: 460px; }
 
-      .t-btn.is-sell {
-        background: var(--red-bg);
-        border-color: var(--red-border);
-        box-shadow:
-          0 0 20px rgba(255, 71, 87, 0.18),
-          inset 0 0 20px rgba(255, 71, 87, 0.05);
-      }
-      .t-btn.is-sell .t-icon {
-        transform: scale(1.15);
-      }
-      .t-btn.is-sell .t-main {
-        color: var(--red);
-      }
-      .t-btn.is-sell .t-sub {
-        color: rgba(255, 71, 87, 0.7);
-      }
+/* ─── animations ─── */
+@keyframes fadeUp  { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+@keyframes slideIn { from{opacity:0;transform:translateY(8px)}  to{opacity:1;transform:translateY(0)} }
+@keyframes pulse   { 0%,100%{opacity:1} 50%{opacity:.3} }
+@keyframes scan    { 0%{top:-8%} 100%{top:108%} }
+@keyframes countUp { from{opacity:0;transform:scale(.96)} to{opacity:1;transform:scale(1)} }
 
-      .t-btn.is-neutral {
-        background: rgba(26, 111, 196, 0.09);
-        border-color: rgba(26, 111, 196, 0.28);
-        box-shadow: 0 0 16px rgba(26, 111, 196, 0.15);
-      }
-      .t-btn.is-neutral .t-main {
-        color: #4a9ae0;
-      }
-      .t-btn.is-neutral .t-sub {
-        color: rgba(74, 154, 224, 0.6);
-      }
+/* ═══════════════════════ HEADER ═══════════════════════ */
+.hdr { text-align:center; margin-bottom:24px; animation:fadeUp .55s ease; }
 
-      .t-btn.is-buy {
-        background: var(--green-bg);
-        border-color: var(--green-border);
-        box-shadow:
-          0 0 20px rgba(0, 209, 122, 0.18),
-          inset 0 0 20px rgba(0, 209, 122, 0.05);
-      }
-      .t-btn.is-buy .t-icon {
-        transform: scale(1.15);
-      }
-      .t-btn.is-buy .t-main {
-        color: var(--green);
-      }
-      .t-btn.is-buy .t-sub {
-        color: rgba(0, 209, 122, 0.7);
-      }
+.hdr-chip {
+  display: inline-block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ac); background: var(--ac-bg); border: 1px solid var(--ac-border);
+  padding: 4px 14px; margin-bottom: 13px;
+  transition: color .4s, background .4s, border-color .4s;
+}
 
-      /* Badge */
-      .t-badge {
-        font-size: 8px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: #ff6b6b;
-        background: rgba(255, 107, 107, 0.15);
-        border: 1px solid rgba(255, 107, 107, 0.35);
-        padding: 3px 6px;
-        border-radius: 2px;
-        font-family: "Share Tech Mono", monospace;
-        font-weight: 600;
-        margin-top: 2px;
-      }
+.hdr h1 {
+  font-size: 28px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: #d8ecff; line-height: 1;
+}
+.hdr h1 em { color: var(--gold); font-style: normal; }
+.hdr-sub {
+  margin-top: 8px; font-size: 11px; letter-spacing: 2px;
+  color: var(--text-sec); font-family: 'Share Tech Mono', monospace;
+  transition: color .4s;
+}
 
-      /* Banner */
-      .strat-banner {
-        margin-top: 10px;
-        overflow: hidden;
-        max-height: 0;
-        transition:
-          max-height 0.4s ease,
-          opacity 0.4s,
-          padding 0.3s;
-        opacity: 0;
-        padding: 0 16px;
-        border: 1px solid transparent;
-        background: transparent;
-        font-family: "Share Tech Mono", monospace;
-        font-size: 11px;
-        text-align: center;
-      }
-      .strat-banner.on {
-        max-height: 80px;
-        opacity: 1;
-        padding: 12px 16px;
-        border-color: var(--th-border);
-        background: var(--th-bg);
-      }
-      .banner-sig {
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        display: block;
-        margin-bottom: 4px;
-        color: var(--th);
-      }
-      .banner-desc {
-        color: var(--text-sec);
-        font-size: 10px;
-      }
+/* ═══════════════════════ MODE SELECTOR ═══════════════════════ */
+.mode-section { margin-bottom: 22px; animation: fadeUp .55s .08s both; }
 
-      /* ──────────────────── DIVIDER ──────────────────── */
-      .divider {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 22px;
-      }
-      .d-line {
-        flex: 1;
-        height: 1px;
-        background: var(--border);
-      }
-      .d-gem {
-        width: 6px;
-        height: 6px;
-        background: var(--th);
-        transform: rotate(45deg);
-        box-shadow: 0 0 8px var(--th);
-        transition:
-          background 0.4s,
-          box-shadow 0.4s;
-      }
+.mode-label {
+  text-align: center; display: block; margin-bottom: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--text-dim);
+}
 
-      /* ──────────────────── CARD ──────────────────── */
-      .card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        padding: 26px;
-        position: relative;
-        overflow: hidden;
-        animation: fadeUp 0.6s 0.2s both;
-      }
-      .card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--th), transparent);
-        transition: background 0.4s;
-      }
-      .card::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        height: 30px;
-        top: -10%;
-        background: linear-gradient(
-          transparent,
-          rgba(255, 255, 255, 0.015),
-          transparent
-        );
-        animation: scanline 6s linear infinite;
-        pointer-events: none;
-      }
+.mode-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
 
-      /* ──────────────────── FIELDS ──────────────────── */
-      .field {
-        margin-bottom: 18px;
-      }
-      .field > label {
-        display: block;
-        font-size: 10px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--text-sec);
-        margin-bottom: 8px;
-        font-family: "Share Tech Mono", monospace;
-      }
-      .field input,
-      .field select {
-        width: 100%;
-        background: var(--bg-input);
-        border: 1px solid var(--border);
-        color: var(--text-primary);
-        font-family: "Share Tech Mono", monospace;
-        font-size: 18px;
-        padding: 13px 15px;
-        outline: none;
-        transition:
-          border-color 0.2s,
-          box-shadow 0.2s;
-        appearance: none;
-        -webkit-appearance: none;
-      }
-      .field input:focus,
-      .field select:focus {
-        border-color: var(--th);
-        box-shadow: 0 0 0 3px var(--th-glow);
-      }
-      .field input::placeholder {
-        color: var(--text-dim);
-        font-size: 14px;
-      }
-      .sel-wrap {
-        position: relative;
-      }
-      .sel-wrap::after {
-        content: "▾";
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--text-sec);
-        font-size: 12px;
-        pointer-events: none;
-      }
-      .field select option {
-        background: var(--bg-card);
-        color: var(--text-primary);
-      }
-      .formula-hint {
-        margin-bottom: 22px;
-        padding: 12px 15px;
-        background: var(--th-bg);
-        border: 1px solid var(--th-border);
-        font-family: "Share Tech Mono", monospace;
-        font-size: 11px;
-        color: var(--text-sec);
-        line-height: 1.9;
-        transition:
-          background 0.4s,
-          border-color 0.4s;
-      }
-      .f-up {
-        color: var(--green);
-      }
-      .f-down {
-        color: var(--red);
-      }
-      .error-msg {
-        display: none;
-        font-size: 11px;
-        color: var(--red);
-        font-family: "Share Tech Mono", monospace;
-        margin-top: 7px;
-      }
+.mode-btn {
+  position: relative; overflow: hidden;
+  padding: 16px 10px 14px;
+  background: var(--bg-input); border: 1px solid var(--border);
+  cursor: pointer; transition: all .3s;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  font-family: 'Rajdhani', sans-serif;
+}
 
-      /* ──────────────────── BUTTON ──────────────────── */
-      .btn-calc {
-        width: 100%;
-        padding: 16px;
-        background: linear-gradient(135deg, var(--th-grad1), var(--th));
-        border: 1px solid var(--th-border);
-        color: #ddeeff;
-        font-family: "Rajdhani", sans-serif;
-        font-size: 15px;
-        font-weight: 700;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        transition:
-          box-shadow 0.3s,
-          transform 0.15s,
-          background 0.4s,
-          border-color 0.4s;
-      }
-      .btn-calc:hover {
-        box-shadow: 0 0 28px var(--th-glow);
-        filter: brightness(1.12);
-        transform: translateY(-1px);
-      }
-      .btn-calc:active {
-        transform: translateY(0);
-      }
-      .btn-calc::after {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -70%;
-        width: 50%;
-        height: 200%;
-        background: rgba(255, 255, 255, 0.07);
-        transform: skewX(-20deg);
-        transition: left 0.5s;
-      }
-      .btn-calc:hover::after {
-        left: 130%;
-      }
+.mode-btn .mb-icon { font-size: 26px; line-height: 1; transition: transform .3s; }
+.mode-btn .mb-head {
+  font-size: 13px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--text-sec);
+  transition: color .3s;
+}
+.mode-btn .mb-sub {
+  font-size: 9px; letter-spacing: 1px; color: var(--text-dim);
+  font-family: 'Share Tech Mono', monospace; transition: color .3s;
+}
+.mode-btn .mb-formula {
+  margin-top: 6px; font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; color: var(--text-dim); transition: color .3s;
+  padding: 4px 10px; border: 1px solid transparent; transition: all .3s;
+}
 
-      /* ──────────────────── RESULTS ──────────────────── */
-      .results {
-        display: none;
-        margin-top: 22px;
-      }
-      .results.on {
-        display: block;
-        animation: slideUp 0.4s ease;
-      }
-      .res-divider {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 16px;
-      }
-      .res-divider-line {
-        flex: 1;
-        height: 1px;
-        background: var(--border);
-      }
-      .res-label {
-        font-size: 10px;
-        letter-spacing: 2px;
-        color: var(--text-dim);
-        font-family: "Share Tech Mono", monospace;
-        text-transform: uppercase;
-        transition: color 0.3s;
-        white-space: nowrap;
-      }
+.mode-btn:hover .mb-head { color: var(--text); }
 
-      /* Result card */
-      .rcard {
-        padding: 18px 20px;
-        margin-bottom: 12px;
-        border: 1px solid;
-        position: relative;
-        overflow: hidden;
-        transition:
-          transform 0.25s,
-          box-shadow 0.4s,
-          opacity 0.4s,
-          filter 0.4s,
-          border-color 0.4s;
-      }
-      .rcard:hover:not(.dimmed) {
-        transform: translateX(4px);
-      }
-      .rcard.up {
-        background: var(--green-bg);
-        border-color: var(--green-border);
-        border-left: 3px solid var(--green);
-      }
-      .rcard.down {
-        background: var(--red-bg);
-        border-color: var(--red-border);
-        border-left: 3px solid var(--red);
-      }
+/* SELL active */
+.mode-btn.active-sell {
+  background: rgba(255,63,80,.07);
+  border-color: rgba(255,63,80,.35);
+  box-shadow: 0 0 24px rgba(255,63,80,.18), inset 0 0 20px rgba(255,63,80,.04);
+}
+.mode-btn.active-sell .mb-icon   { transform: scale(1.18); }
+.mode-btn.active-sell .mb-head   { color: var(--red); }
+.mode-btn.active-sell .mb-sub    { color: rgba(255,63,80,.75); }
+.mode-btn.active-sell .mb-formula {
+  color: var(--red); border-color: rgba(255,63,80,.25);
+  background: rgba(255,63,80,.06);
+}
+.mode-btn.active-sell::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+}
 
-      .rcard.focused {
-        transform: scale(1.018);
-        z-index: 2;
-      }
-      .rcard.focused:hover {
-        transform: scale(1.018) translateX(4px);
-      }
-      .rcard.up.focused {
-        box-shadow:
-          0 0 32px rgba(255, 71, 87, 0.22),
-          0 0 0 1px rgba(255, 71, 87, 0.4);
-        border-color: rgba(255, 71, 87, 0.55);
-      }
-      .rcard.down.focused {
-        box-shadow:
-          0 0 32px rgba(0, 209, 122, 0.22),
-          0 0 0 1px rgba(0, 209, 122, 0.4);
-        border-color: rgba(0, 209, 122, 0.55);
-      }
-      .rcard.dimmed {
-        opacity: 0.18;
-        filter: saturate(0.2) brightness(0.6);
-        pointer-events: none;
-      }
+/* BUY active */
+.mode-btn.active-buy {
+  background: rgba(0,204,118,.07);
+  border-color: rgba(0,204,118,.32);
+  box-shadow: 0 0 24px rgba(0,204,118,.16), inset 0 0 20px rgba(0,204,118,.04);
+}
+.mode-btn.active-buy .mb-icon   { transform: scale(1.18); }
+.mode-btn.active-buy .mb-head   { color: var(--green); }
+.mode-btn.active-buy .mb-sub    { color: rgba(0,204,118,.75); }
+.mode-btn.active-buy .mb-formula {
+  color: var(--green); border-color: rgba(0,204,118,.25);
+  background: rgba(0,204,118,.06);
+}
+.mode-btn.active-buy::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
 
-      .focus-badge {
-        display: none;
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        font-family: "Share Tech Mono", monospace;
-        font-size: 8px;
-        letter-spacing: 2px;
-        padding: 3px 9px;
-        border: 1px solid;
-        text-transform: uppercase;
-        animation: blink 1.8s infinite;
-      }
-      .rcard.focused .focus-badge {
-        display: inline-block;
-      }
-      .rcard.up .focus-badge {
-        color: var(--red);
-        border-color: rgba(255, 71, 87, 0.4);
-        background: var(--red-bg);
-      }
-      .rcard.down .focus-badge {
-        color: var(--green);
-        border-color: rgba(0, 209, 122, 0.4);
-        background: var(--green-bg);
-      }
+/* ═══════════════════════ DIVIDER ═══════════════════════ */
+.div { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+.div-line { flex:1; height:1px; background:var(--border); }
+.div-gem  {
+  width:7px; height:7px; transform:rotate(45deg);
+  background: var(--ac); box-shadow: 0 0 10px var(--ac);
+  transition: background .4s, box-shadow .4s;
+}
 
-      .r-label {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        font-size: 9px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        font-family: "Share Tech Mono", monospace;
-        margin-bottom: 5px;
-        transition: color 0.3s;
-      }
-      .r-label.up {
-        color: var(--green);
-      }
-      .r-label.down {
-        color: var(--red);
-      }
-      .dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        flex-shrink: 0;
-        animation: blink 2s infinite;
-      }
-      .r-label.up .dot {
-        background: var(--green);
-        box-shadow: 0 0 5px var(--green);
-      }
-      .r-label.down .dot {
-        background: var(--red);
-        box-shadow: 0 0 5px var(--red);
-      }
+/* ═══════════════════════ INPUT CARD ═══════════════════════ */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  padding: 24px; position: relative; overflow: hidden;
+  animation: fadeUp .55s .16s both;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ac), transparent);
+  transition: background .4s;
+}
+/* scanline atmosphere */
+.card::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 28px;
+  background: linear-gradient(transparent, rgba(255,255,255,.012), transparent);
+  animation: scan 7s linear infinite; pointer-events: none; z-index: 0;
+}
+.card > * { position: relative; z-index: 1; }
 
-      .r-val {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 30px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        line-height: 1.1;
-      }
-      .r-val.up {
-        color: var(--green);
-      }
-      .r-val.down {
-        color: var(--red);
-      }
-      .r-formula {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 10px;
-        color: var(--text-dim);
-        margin-top: 5px;
-      }
-      .r-pct {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 11px;
-        margin-top: 3px;
-        opacity: 0.65;
-      }
-      .r-pct.up {
-        color: var(--green);
-      }
-      .r-pct.down {
-        color: var(--red);
-      }
+/* ── field ── */
+.field { margin-bottom: 20px; }
+.field label {
+  display: block; font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-sec); margin-bottom: 8px;
+}
+.field input {
+  width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+  color: var(--text); font-family: 'Share Tech Mono', monospace;
+  font-size: 20px; padding: 13px 15px; outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  appearance: none; -webkit-appearance: none;
+}
+.field input:focus {
+  border-color: var(--ac); box-shadow: 0 0 0 3px var(--ac-glow);
+}
+.field input::placeholder { color: var(--text-dim); font-size: 14px; }
+.err {
+  display: none; font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; color: var(--red); margin-top: 7px;
+}
 
-      /* Strategy context tip */
-      .s-context {
-        display: none;
-        margin-top: 11px;
-        padding: 10px 12px;
-        font-family: "Share Tech Mono", monospace;
-        font-size: 10px;
-        letter-spacing: 0.5px;
-        line-height: 1.8;
-        border-left: 2px solid;
-      }
-      .rcard.up .s-context {
-        color: var(--red);
-        border-color: var(--red);
-        background: rgba(255, 71, 87, 0.05);
-      }
-      .rcard.down .s-context {
-        color: var(--green);
-        border-color: var(--green);
-        background: rgba(0, 209, 122, 0.05);
-      }
-      .rcard.focused .s-context {
-        display: block;
-        animation: slideUp 0.35s ease;
-      }
+/* ── formula preview box ── */
+.formula-box {
+  padding: 11px 14px; margin-bottom: 20px;
+  background: var(--ac-bg); border: 1px solid var(--ac-border);
+  font-family: 'Share Tech Mono', monospace; font-size: 11px;
+  color: var(--text-sec); line-height: 1; transition: all .4s;
+  display: flex; align-items: center; gap: 10px;
+}
+.formula-box .fb-label { font-size: 9px; letter-spacing: 1px; opacity: .7; }
+.formula-box .fb-eq {
+  font-size: 13px; color: var(--ac); font-weight: 700; letter-spacing: 1px;
+  transition: color .4s;
+}
 
-      /* Info row */
-      .info-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 12px 14px;
-        margin-top: 14px;
-        background: var(--th-bg);
-        border: 1px solid var(--th-border);
-        transition:
-          background 0.4s,
-          border-color 0.4s;
-      }
-      .info-item {
-        text-align: center;
-      }
-      .info-item .i-lbl {
-        display: block;
-        font-size: 9px;
-        letter-spacing: 1px;
-        color: var(--text-dim);
-        font-family: "Share Tech Mono", monospace;
-        text-transform: uppercase;
-      }
-      .info-item .i-val {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 13px;
-        color: var(--text-sec);
-        margin-top: 2px;
-      }
+/* ── button ── */
+.btn {
+  width: 100%; padding: 15px;
+  background: linear-gradient(140deg, var(--ac-dark), var(--ac));
+  border: 1px solid var(--ac-border); color: #ddeeff;
+  font-family: 'Rajdhani', sans-serif; font-size: 14px;
+  font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: box-shadow .3s, transform .15s, background .4s, border-color .4s;
+}
+.btn:hover { box-shadow: 0 0 30px var(--ac-glow); filter: brightness(1.1); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn::before {
+  content: ''; position: absolute; top: -50%; left: -65%;
+  width: 45%; height: 200%; background: rgba(255,255,255,.08);
+  transform: skewX(-22deg); transition: left .5s;
+}
+.btn:hover::before { left: 130%; }
 
-      /* ──────────────────── FOOTER ──────────────────── */
-      .footer {
-        text-align: center;
-        margin-top: 18px;
-        font-size: 10px;
-        color: var(--text-dim);
-        font-family: "Share Tech Mono", monospace;
-        letter-spacing: 1px;
-      }
+/* ═══════════════════════ RESULT PANEL ═══════════════════════ */
+.result-panel { display: none; margin-top: 20px; }
+.result-panel.on { display: block; animation: slideIn .4s ease; }
 
-      @media (max-width: 380px) {
-        .header h1 {
-          font-size: 24px;
-        }
-        .r-val {
-          font-size: 24px;
-        }
-        .t-btn .t-icon {
-          font-size: 18px;
-        }
-        .t-btn .t-main {
-          font-size: 11px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <!-- HEADER -->
-      <div class="header">
-        <div class="header-badge" id="hdr-badge">
-          Reza Surya · SQUARE ROOT METHOD
-        </div>
-        <h1 class="">JA$UR <span>CALCULATOR METHOD</span></h1>
-      </div>
+/* ── result card ── */
+.rcard {
+  padding: 20px 22px; border: 1px solid;
+  position: relative; overflow: hidden;
+}
 
-      <!-- STRATEGY TOGGLE -->
-      <div class="strategy-section">
-        <span class="s-label">Choose Strategy</span>
-        <div class="toggle-row">
-          <button class="t-btn" id="btn-sell" onclick="setMode('sell')">
-            <span class="t-icon">📉</span>
-            <span class="t-main">UPTREND</span>
-            <span class="t-sub">Cari Area SELL</span>
-          </button>
+.rcard.sell-card {
+  background: rgba(255,63,80,.07);
+  border-color: rgba(255,63,80,.35);
+  border-left: 3px solid var(--red);
+}
+.rcard.buy-card {
+  background: rgba(0,204,118,.07);
+  border-color: rgba(0,204,118,.32);
+  border-left: 3px solid var(--green);
+}
 
-          <button
-            class="t-btn is-neutral"
-            id="btn-neutral"
-            onclick="setMode('neutral')"
-          >
-            <span class="t-icon">⚖️</span>
-            <span class="t-main">NETRAL</span>
+/* glow shimmer on top edge */
+.rcard.sell-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+}
+.rcard.buy-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
 
-            <span class="t-badge">Not Recomend</span>
-          </button>
+/* ── entry type tag ── */
+.entry-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 3px 10px 3px 8px; border: 1px solid; margin-bottom: 10px;
+}
+.sell-card .entry-tag { color: var(--red);   border-color: rgba(255,63,80,.35);  background: rgba(255,63,80,.08); }
+.buy-card  .entry-tag { color: var(--green); border-color: rgba(0,204,118,.32); background: rgba(0,204,118,.07); }
+.entry-tag .dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  animation: pulse 1.8s infinite;
+}
+.sell-card .dot { background: var(--red);   box-shadow: 0 0 5px var(--red); }
+.buy-card  .dot { background: var(--green); box-shadow: 0 0 5px var(--green); }
 
-          <button class="t-btn" id="btn-buy" onclick="setMode('buy')">
-            <span class="t-icon">📈</span>
-            <span class="t-main">DOWNTREND</span>
-            <span class="t-sub">Cari Area BUY</span>
-          </button>
-        </div>
-        <div class="strat-banner" id="strat-banner">
-          <span class="banner-sig" id="banner-sig">—</span>
-          <span class="banner-desc" id="banner-desc">—</span>
-        </div>
-      </div>
+/* ── result value ── */
+.rval {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 42px; font-weight: 700; letter-spacing: 1px; line-height: 1;
+  animation: countUp .35s ease;
+}
+.sell-card .rval { color: var(--red);   text-shadow: 0 0 24px rgba(255,63,80,.3); }
+.buy-card  .rval { color: var(--green); text-shadow: 0 0 24px rgba(0,204,118,.25); }
 
-      <!-- DIVIDER -->
-      <div class="divider">
-        <div class="d-line"></div>
-        <div class="d-gem"></div>
-        <div class="d-line"></div>
-      </div>
+/* ── sub info ── */
+.rval-sub { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+.rpct {
+  font-family: 'Share Tech Mono', monospace; font-size: 12px; opacity: .65;
+}
+.sell-card .rpct { color: var(--red); }
+.buy-card  .rpct { color: var(--green); }
 
-      <!-- MAIN CARD -->
-      <div class="card">
-        <div class="field">
-          <label>Harga Saat Ini</label>
-          <input
-            type="number"
-            id="price"
-            placeholder="Masukkan harga"
-            min="0"
-            step="any"
-          />
-          <div class="error-msg" id="err">
-            ⚠ Masukkan harga yang valid (lebih dari 0)
-          </div>
-        </div>
+.rformula { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--text-dim); }
 
-        <div class="field">
-          <label>Faktor Modifikasi (Sudut Gann)</label>
-          <div class="sel-wrap">
-            <select id="factor">
-              <option value="0.125">0.125 — 45° (1/8)</option>
-              <option value="0.25">0.250 — 90° (1/4)</option>
-              <option value="0.375">0.375 — 135° (3/8)</option>
-              <option value="0.5">0.500 — 180° (1/2)</option>
-              <option value="0.625">0.625 — 225° (5/8)</option>
-              <option value="0.75">0.750 — 270° (3/4)</option>
-              <option value="0.875">0.875 — 315° (7/8)</option>
-              <option value="1.0">1.000 — 360° (1/1)</option>
-            </select>
-          </div>
-        </div>
+/* ── divider inside result ── */
+.r-sep { height: 1px; background: var(--border); margin: 14px 0; }
 
-        <button class="btn-calc" onclick="calc()">
-          ▶ &nbsp;<span id="btn-txt">HITUNG TARGET</span>
-        </button>
+/* ── strategy tip ── */
+.stip {
+  font-family: 'Share Tech Mono', monospace; font-size: 10px;
+  line-height: 1.85; letter-spacing: .4px;
+  padding: 10px 12px; border-left: 2px solid;
+}
+.sell-card .stip { color: rgba(255,63,80,.8);  border-color: var(--red);   background: rgba(255,63,80,.05); }
+.buy-card  .stip { color: rgba(0,204,118,.8); border-color: var(--green); background: rgba(0,204,118,.04); }
 
-        <!-- RESULTS -->
-        <div class="results" id="results">
-          <div class="res-divider">
-            <div class="res-divider-line"></div>
-            <span class="res-label" id="res-label">HASIL ANALISIS</span>
-            <div class="res-divider-line"></div>
-          </div>
+/* ── info bar ── */
+.ibar {
+  display: flex; gap: 0; margin-top: 16px;
+  border: 1px solid var(--ac-border); background: var(--ac-bg);
+  transition: all .4s;
+}
+.ibar-item {
+  flex: 1; text-align: center; padding: 10px 6px;
+  border-right: 1px solid var(--border);
+}
+.ibar-item:last-child { border-right: none; }
+.ibar-lbl { font-family: 'Share Tech Mono', monospace; font-size: 8px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); display: block; }
+.ibar-val { font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--text-sec); margin-top: 3px; }
 
-          <!-- UP card -->
-          <div class="rcard up" id="card-up">
-            <div class="focus-badge">◉ ZONA AKTIF</div>
-            <div class="r-label up">
-              <span class="dot"></span
-              ><span id="lbl-up">TARGET ATAS (RESISTANCE)</span>
-            </div>
-            <div class="r-val up" id="val-up">—</div>
-            <div class="r-formula" id="frm-up"></div>
-            <div class="r-pct up" id="pct-up"></div>
-            <div class="s-context">
-              ⚠&nbsp; ZONA REVERSAL SELL<br />
-              Harga mendekati level ini → perhatikan sinyal bearish confirmation
-              sebelum entry SHORT.
-            </div>
-          </div>
+/* ── no-mode placeholder ── */
+.no-mode {
+  display: none; margin-top: 20px;
+  padding: 18px; border: 1px dashed var(--border);
+  text-align: center; font-family: 'Share Tech Mono', monospace;
+  font-size: 11px; color: var(--text-dim); letter-spacing: 1px;
+  line-height: 1.7;
+}
+.no-mode.on { display: block; }
 
-          <!-- DOWN card -->
-          <div class="rcard down" id="card-down">
-            <div class="focus-badge">◉ ZONA AKTIF</div>
-            <div class="r-label down">
-              <span class="dot"></span
-              ><span id="lbl-down">TARGET BAWAH (SUPPORT)</span>
-            </div>
-            <div class="r-val down" id="val-down">—</div>
-            <div class="r-formula" id="frm-down"></div>
-            <div class="r-pct down" id="pct-down"></div>
-            <div class="s-context">
-              ✔&nbsp; ZONA REVERSAL BUY<br />
-              Harga mendekati level ini → tunggu bullish confirmation sebelum
-              entry LONG.
-            </div>
-          </div>
+/* ═══════════════════════ FOOTER ═══════════════════════ */
+.footer {
+  text-align: center; margin-top: 20px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: 1.5px; color: var(--text-dim);
+}
 
-          <!-- Info bar -->
-          <div class="info-row">
-            <div class="info-item">
-              <span class="i-lbl">√ Harga</span>
-              <div class="i-val" id="i-sqrt">—</div>
-            </div>
-            <div class="info-item">
-              <span class="i-lbl">Faktor</span>
-              <div class="i-val" id="i-factor">—</div>
-            </div>
-            <div class="info-item">
-              <span class="i-lbl">Range</span>
-              <div class="i-val" id="i-range">—</div>
-            </div>
-            <div class="info-item">
-              <span class="i-lbl">Input</span>
-              <div class="i-val" id="i-price">—</div>
-            </div>
-          </div>
-        </div>
-      </div>
+/* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+@media (max-width: 380px) {
+  .hdr h1 { font-size: 22px; }
+  .rval   { font-size: 32px; }
+  .mode-btn .mb-icon { font-size: 22px; }
+  .mode-btn .mb-head { font-size: 11px; }
+  .mode-btn .mb-formula { font-size: 9px; }
+}
+</style>
+</head>
+<body>
 
-      <div class="footer">JASURFX &nbsp;·&nbsp; NOT FINANCIAL ADVICE</div>
+<div class="wrap">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="hdr">
+    <div class="hdr-chip" id="hdr-chip">Reja · SQUARE ROOT METHOD</div>
+    <h1>JA$UR <em>CALCULATOR</em></h1>
+    <p class="hdr-sub" id="hdr-sub">// PILIH MODE → MASUKKAN HARGA → HITUNG</p>
+  </div>
+
+  <!-- ═══ MODE SELECTOR ═══ -->
+  <div class="mode-section">
+    <span class="mode-label">▸ PILIH ARAH TREND</span>
+    <div class="mode-row">
+
+      <!-- SELL -->
+      <button class="mode-btn" id="mbtn-sell" onclick="setMode('sell')">
+        <span class="mb-icon">📉</span>
+        <span class="mb-head">CARI SELL</span>
+        <span class="mb-sub">Uptrend Reversal</span>
+      </button>
+
+      <!-- BUY -->
+      <button class="mode-btn" id="mbtn-buy" onclick="setMode('buy')">
+        <span class="mb-icon">📈</span>
+        <span class="mb-head">CARI BUY</span>
+        <span class="mb-sub">Downtrend Reversal</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ═══ DIVIDER ═══ -->
+  <div class="div">
+    <div class="div-line"></div>
+    <div class="div-gem"></div>
+    <div class="div-line"></div>
+  </div>
+
+  <!-- ═══ INPUT CARD ═══ -->
+  <div class="card">
+
+    <div class="field">
+      <label>PRICE </label>
+      <input type="number" id="price" placeholder="Masukkan harga" min="0" step="any">
+      <div class="err" id="err">⚠ Masukkan harga yang valid (lebih dari 0)</div>
     </div>
 
-    <script>
-      let mode = "neutral";
-      function q(id) {
-        return document.getElementById(id);
-      }
+    <!-- Formula preview — updates per mode -->
+    <div class="formula-box" id="formula-box">
+      <div>
+        <div class="fb-label">RUMUS AKTIF</div>
+        <div class="fb-eq" id="fb-eq">— Pilih mode terlebih dahulu —</div>
+      </div>
+    </div>
 
-      function fmt(n) {
-        return n >= 1000
-          ? n.toLocaleString("id-ID", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })
-          : n.toFixed(4);
-      }
-      function pct(base, target) {
-        const d = ((target - base) / base) * 100;
-        return `${d >= 0 ? "+" : ""}${d.toFixed(2)}% dari harga saat ini`;
-      }
+    <button class="btn" id="calc-btn" onclick="calc()">
+      ▶ &nbsp;<span id="btn-txt">HITUNG</span>
+    </button>
 
-      function setMode(m) {
-        mode = m;
-        document.body.classList.remove("sell", "buy");
-        ["btn-sell", "btn-neutral", "btn-buy"].forEach((id) => {
-          q(id).className = "t-btn";
-        });
+    <!-- ═══ RESULT PANEL ═══ -->
+    <div class="result-panel" id="result-panel">
+      <div class="rcard" id="rcard">
 
-        const banner = q("strat-banner");
+        <div class="entry-tag">
+          <span class="dot"></span>
+          <span id="entry-label">ENTRY</span>
+        </div>
 
-        if (m === "sell") {
-          document.body.classList.add("sell");
-          q("btn-sell").classList.add("is-sell");
-          q("hdr-badge").textContent = "UPTREND · SELL ZONE SCANNER";
-          q("hdr-sub").textContent = "// MENCARI AREA REVERSAL SELL";
-          q("btn-txt").textContent = "SCAN SELL ZONE";
-          q("banner-sig").textContent = "📉  UPTREND — CARI AREA SELL";
-          q("banner-desc").textContent =
-            "Fokus pada Target Atas sebagai Zona Reversal SELL";
-          banner.classList.add("on");
-        } else if (m === "buy") {
-          document.body.classList.add("buy");
-          q("btn-buy").classList.add("is-buy");
-          q("hdr-badge").textContent = "DOWNTREND · BUY ZONE SCANNER";
-          q("hdr-sub").textContent = "// MENCARI AREA REVERSAL BUY";
-          q("btn-txt").textContent = "SCAN BUY ZONE";
-          q("banner-sig").textContent = "📈  DOWNTREND — CARI AREA BUY";
-          q("banner-desc").textContent =
-            "Fokus pada Target Bawah sebagai Zona Reversal BUY";
-          banner.classList.add("on");
-        } else {
-          q("btn-neutral").classList.add("is-neutral");
-          q("hdr-badge").textContent = "JASUR · SQUARE ROOT METHOD";
-          q("hdr-sub").textContent = "// PRICE TARGET ANALYSIS TOOL";
-          q("btn-txt").textContent = "HITUNG TARGET";
-          banner.classList.remove("on");
-        }
+        <div class="rval" id="rval">—</div>
 
-        applyFocus();
-      }
+        <div class="rval-sub">
+          <span class="rpct" id="rpct"></span>
+          <span class="rformula" id="rformula"></span>
+        </div>
 
-      function applyFocus() {
-        const cUp = q("card-up");
-        const cDown = q("card-down");
-        cUp.classList.remove("focused", "dimmed");
-        cDown.classList.remove("focused", "dimmed");
+        <div class="r-sep"></div>
 
-        if (mode === "sell") {
-          cUp.classList.add("focused");
-          cDown.classList.add("dimmed");
-          q("lbl-up").textContent = "TARGET ATAS — ZONA REVERSAL SELL";
-          q("lbl-down").textContent = "TARGET BAWAH (TERSEKUNDER)";
-          q("res-label").textContent = "SELL ZONE TERIDENTIFIKASI";
-        } else if (mode === "buy") {
-          cDown.classList.add("focused");
-          cUp.classList.add("dimmed");
-          q("lbl-down").textContent = "TARGET BAWAH — ZONA REVERSAL BUY";
-          q("lbl-up").textContent = "TARGET ATAS (TERSEKUNDER)";
-          q("res-label").textContent = "BUY ZONE TERIDENTIFIKASI";
-        } else {
-          q("lbl-up").textContent = "TARGET ATAS (RESISTANCE)";
-          q("lbl-down").textContent = "TARGET BAWAH (SUPPORT)";
-          q("res-label").textContent = "HASIL ANALISIS";
-        }
-      }
+        <div class="stip" id="stip"></div>
 
-      function calc() {
-        const pinput = q("price");
-        const price = parseFloat(pinput.value);
-        const factor = parseFloat(q("factor").value);
-        const results = q("results");
+      </div>
 
-        if (!pinput.value || isNaN(price) || price <= 0) {
-          q("err").style.display = "block";
-          pinput.style.borderColor = "var(--red)";
-          results.classList.remove("on");
-          return;
-        }
+      <!-- Info bar -->
+      <div class="ibar" id="ibar">
+        <div class="ibar-item">
+          <span class="ibar-lbl">√ Harga</span>
+          <div class="ibar-val" id="ib-sqrt">—</div>
+        </div>
+        <div class="ibar-item">
+          <span class="ibar-lbl">Faktor</span>
+          <div class="ibar-val" id="ib-factor">—</div>
+        </div>
+        <div class="ibar-item">
+          <span class="ibar-lbl">Selisih</span>
+          <div class="ibar-val" id="ib-delta">—</div>
+        </div>
+        <div class="ibar-item">
+          <span class="ibar-lbl">Input</span>
+          <div class="ibar-val" id="ib-price">—</div>
+        </div>
+      </div>
 
-        q("err").style.display = "none";
-        pinput.style.borderColor = "var(--border)";
+    </div><!-- /result-panel -->
 
-        const sq = Math.sqrt(price);
-        const tUp = Math.pow(sq + factor, 2);
-        const tDn = Math.pow(sq - factor, 2);
-        const rng = tUp - tDn;
+    <!-- No mode selected hint -->
+    <div class="no-mode" id="no-mode">
+      Pilih mode <strong>CARI SELL</strong> atau <strong>CARI BUY</strong><br>
+      di atas sebelum menghitung.
+    </div>
 
-        q("val-up").textContent = fmt(tUp);
-        q("val-down").textContent = fmt(tDn);
-        q("frm-up").textContent =
-          `(√${fmt(price)} + ${factor})² = (${sq.toFixed(4)} + ${factor})²`;
-        q("frm-down").textContent =
-          `(√${fmt(price)} − ${factor})² = (${sq.toFixed(4)} − ${factor})²`;
-        q("pct-up").textContent = pct(price, tUp);
-        q("pct-down").textContent = pct(price, tDn);
-        q("i-sqrt").textContent = sq.toFixed(4);
-        q("i-factor").textContent = factor;
-        q("i-range").textContent = fmt(rng);
-        q("i-price").textContent = fmt(price);
+  </div><!-- /card -->
 
-        results.classList.remove("on");
-        void results.offsetWidth;
-        results.classList.add("on");
-        applyFocus();
-      }
+  <div class="footer">JASUR SQUARE ROOT CALCULATOR &nbsp;·&nbsp; NOT FINANCIAL ADVICE</div>
 
-      q("price").addEventListener("keydown", (e) => {
-        if (e.key === "Enter") calc();
-      });
-    </script>
-  </body>
+</div><!-- /wrap -->
+
+<script>
+/* ══════════════════ STATE ══════════════════ */
+const FACTOR = 0.125;
+let   mode   = null; // 'sell' | 'buy' | null
+
+/* ══════════════════ UTILS ══════════════════ */
+const q = id => document.getElementById(id);
+
+function fmt(n) {
+  return n >= 1000
+    ? n.toLocaleString('id-ID', { minimumFractionDigits:2, maximumFractionDigits:2 })
+    : n.toFixed(4);
+}
+
+function pct(base, target) {
+  const d = (target - base) / base * 100;
+  return `${d >= 0 ? '+' : ''}${d.toFixed(2)}%`;
+}
+
+/* ══════════════════ SET MODE ══════════════════ */
+function setMode(m) {
+  mode = m;
+  const body = document.body;
+  body.classList.remove('sell', 'buy');
+
+  // reset btns
+  ['mbtn-sell', 'mbtn-buy'].forEach(id => {
+    q(id).className = 'mode-btn';
+  });
+
+  if (m === 'sell') {
+    body.classList.add('sell');
+    q('mbtn-sell').classList.add('active-sell');
+    q('hdr-chip').textContent = 'UPTREND · SELL REVERSAL SCANNER';
+    q('hdr-sub').textContent  = '// MODE: CARI ENTRY SELL — UPTREND REVERSAL';
+    q('btn-txt').textContent  = 'SCAN SELL ZONE';
+    q('fb-eq').textContent    = '( √harga + 0.125 )²  →  RESISTANCE LEVEL';
+
+  } else {
+    body.classList.add('buy');
+    q('mbtn-buy').classList.add('active-buy');
+    q('hdr-chip').textContent = 'DOWNTREND · BUY REVERSAL SCANNER';
+    q('hdr-sub').textContent  = '// MODE: CARI ENTRY BUY — DOWNTREND REVERSAL';
+    q('btn-txt').textContent  = 'SCAN BUY ZONE';
+    q('fb-eq').textContent    = '( √harga − 0.125 )²  →  SUPPORT LEVEL';
+  }
+
+  // hide stale result, hide no-mode hint
+  q('result-panel').classList.remove('on');
+  q('no-mode').classList.remove('on');
+
+  // re-run calc if price already filled
+  const price = parseFloat(q('price').value);
+  if (price > 0) calc();
+}
+
+/* ══════════════════ CALCULATE ══════════════════ */
+function calc() {
+  const pinput = q('price');
+  const price  = parseFloat(pinput.value);
+  const rp     = q('result-panel');
+  const nm     = q('no-mode');
+
+  // Guard: no mode
+  if (!mode) {
+    rp.classList.remove('on');
+    nm.classList.add('on');
+    return;
+  }
+  nm.classList.remove('on');
+
+  // Guard: invalid price
+  if (!pinput.value || isNaN(price) || price <= 0) {
+    q('err').style.display = 'block';
+    pinput.style.borderColor = 'var(--red)';
+    rp.classList.remove('on');
+    return;
+  }
+  q('err').style.display = 'none';
+  pinput.style.borderColor = 'var(--border)';
+
+  const sq     = Math.sqrt(price);
+  const factor = mode === 'sell' ? +FACTOR : -FACTOR;
+  const result = Math.pow(sq + factor, 2);
+  const delta  = Math.abs(result - price);
+
+  /* ── style rcard ── */
+  const rc = q('rcard');
+  rc.className = `rcard ${mode === 'sell' ? 'sell-card' : 'buy-card'}`;
+
+  /* ── entry label ── */
+  q('entry-label').textContent = mode === 'sell'
+    ? 'ENTRY SELL  /  RESISTANCE LEVEL'
+    : 'ENTRY BUY  /  SUPPORT LEVEL';
+
+  /* ── big value ── */
+  q('rval').textContent = fmt(result);
+
+  /* ── pct & formula ── */
+  q('rpct').textContent = pct(price, result) + ' dari harga referensi';
+
+  const sign = mode === 'sell' ? '+' : '−';
+  q('rformula').textContent =
+    `(${sq.toFixed(4)} ${sign} ${FACTOR})² = ${fmt(result)}`;
+
+  /* ── strategy tip ── */
+  q('stip').textContent = mode === 'sell'
+    ? '⚠  ZONA REVERSAL SELL\nHarga mendekati level ini → amati sinyal bearish (rejection, engulfing, pin bar) sebelum eksekusi SHORT. Gunakan level ini sebagai Take Profit jika sedang Long.'
+    : '✔  ZONA REVERSAL BUY\nHarga mendekati level ini → tunggu konfirmasi bullish (hammer, breakout retest) sebelum eksekusi LONG. Gunakan level ini sebagai Take Profit jika sedang Short.';
+
+  /* ── info bar ── */
+  q('ib-sqrt').textContent   = sq.toFixed(4);
+  q('ib-factor').textContent = (factor >= 0 ? '+' : '') + factor;
+  q('ib-delta').textContent  = fmt(delta);
+  q('ib-price').textContent  = fmt(price);
+
+  /* ── ibar accent ── */
+  const ib = q('ibar');
+  ib.style.background   = mode === 'sell' ? 'rgba(255,63,80,.06)'  : 'rgba(0,204,118,.06)';
+  ib.style.borderColor  = mode === 'sell' ? 'rgba(255,63,80,.28)'  : 'rgba(0,204,118,.26)';
+
+  /* ── animate in ── */
+  rp.classList.remove('on');
+  void rp.offsetWidth;
+  rp.classList.add('on');
+}
+
+/* ══════════════════ ENTER KEY ══════════════════ */
+q('price').addEventListener('keydown', e => { if (e.key === 'Enter') calc(); });
+</script>
+</body>
 </html>
